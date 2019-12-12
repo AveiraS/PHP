@@ -1,38 +1,34 @@
 <?PHP
-
 class UnholyFactory
 {
-	public $fighter = Array();
-	public function absorb($bonhomme)
+	private $_army = array();	
+	public function absorb($type)
 	{
-		$type = new ReflectionClass($bonhomme);
-		if ($type->getParentClass())
-		{
-			$name = $bonhomme->returnName();
-			if (array_key_exists($name, $this->fighter))
-				print "(Factory already absorbed a fighter of type " . $name . ")" . PHP_EOL;
-			else
-			{
-				print "(Factory absorbed a fighter of type " . $name . ")" . PHP_EOL;
-				$this->fighter[$name] = $bonhomme;
+		if ($type instanceof Fighter)
+		{	
+			if (!in_array($type, $this->_army)) 
+			{	
+				$this->_army[] = $type;
+				print "(Factory absorbed a fighter of type ".$type.")".PHP_EOL;
 			}
+			else 
+				print "(Factory already absorbed a fighter of type ".$type.")".PHP_EOL;
 		}
-		else
-			print "(Factory can't absorb this, it's not  a fighter)" . PHP_EOL;
+		else 
+			print "(Factory can't absorb this, it's not a fighter)".PHP_EOL;
 	}
-	public function fabricate($fab)
+	public function fabricate($rf)
 	{
-		if (array_key_exists($fab, $this->fighter))
-		{
-			print "(Factory fabricates a fighter of type " . $fab . ")" . PHP_EOL;
-			return (clone $this->fighter[$fab]);
+		foreach ($this->_army as $kind)
+		{	
+			if ((string) $kind === $rf)	
+			{
+				print "(Factory fabricates a fighter of type ".$rf.")".PHP_EOL;	
+				return clone $kind;
+			}	
 		}
-		else
-		{
-			print "(Factory hasn't absorbed any fighter of type " . $fab . ")" . PHP_EOL;
-			return (NULL);
-		}
+		print "(Factory hasn't absorbed any fighter of type ".$rf.")".PHP_EOL;	
+		return ;				
 	}
 }
-
 ?>
