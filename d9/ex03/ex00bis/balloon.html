@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Balloon</title>
+    <style>
+        body {
+            display: grid;
+            height: 100vh;
+            justify-content: center;
+            align-content: center;
+        }
+        
+        #balloon {
+            height: 200px;
+            width: 200px;
+            background-color: red;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(53, 53, 53)">
+    <div id="balloon"></div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script>
+        const color = new Array('red', 'green', 'blue');
+        let i = 0;
+        const balloon = $('#balloon');
+        balloon.click(function(env) {
+            env.preventDefault();
+            if ($(balloon).width() >= 410) {
+                $(balloon).width(200);
+                $(balloon).height(200);
+            } else {
+                $(balloon).width($(balloon).width() + 10);
+                $(balloon).height($(balloon).width() + 10);
+                (i >= 2) ? i = 0: i++;
+            }
+            $(balloon).css('backgroundColor', color[i]);
+        });
+
+        balloon.mouseout(function(env) {
+            env.preventDefault();
+
+            if ($(balloon).width() <= 200) {
+                $(balloon).width(200);
+                $(balloon).height(200);
+            } else {
+                $(balloon).width($(balloon).width() - 5);
+                $(balloon).height($(balloon).width() - 5);
+            }
+            (i <= 0) ? i = 2: i--;
+            $(balloon).css('backgroundColor', color[i]);
+        });
+    </script>
+</body>
+
+</html>

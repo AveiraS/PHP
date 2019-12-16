@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+<head>
+</head>
+
+<body style="background-color: rgb(53, 53, 53); text-align: center">
+    <form id="message">
+        <input type="number" id="nb1"></input>
+        <select id="operations">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+      <option value="%">%</option>
+        </select>
+        <input type="number" id="nb2"></input>
+        <input type="submit" value="Try me !"></input>
+    </form>
+    <script>
+        setInterval(function() {
+            alert("Please, use me...");
+        }, 30000);
+    </script>
+
+    <script>
+        const form = document.getElementById('message');
+
+        message.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var result;
+            const operation = document.getElementById("operations").value;
+            const num1 = parseInt(document.getElementById("nb1").value);
+            const num2 = parseInt(document.getElementById("nb2").value);
+            if (!Number.isInteger(num1) || !Number.isInteger(num2) || num1 < 0 || num2 < 0)
+                alert("Error :(");
+            else {
+                if (operation == "+")
+                    result = num1 + num2;
+                else if (operation == "-")
+                    result = num1 - num2;
+                else if (operation == "*")
+                    result = num1 * num2;
+                else if (num2 == 0)
+                    result = "It's over 9000 !";
+                else if (operation == "/")
+                    result = num1 / num2;
+                else if (operation == "%")
+                    result = num1 % num2;
+                console.log(result);
+                alert(result);
+            }
+        });
+    </script>
+</body>
+
+</html>

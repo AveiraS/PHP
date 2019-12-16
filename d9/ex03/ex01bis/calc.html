@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body style="background-color: rgb(53, 53, 53); text-align: center">
+    <form id="form">
+        <input type="number" id="left">
+        <select id="operation">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="%">%</option>
+      </select>
+        <input type="number" id="right">
+        <input type="submit" value="Try me!">
+    </form>
+    <script>
+        const please = () => {
+            alert('Please, use me...');
+            setTimeout(please, 30000);
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script>
+        const form = $('#form');
+
+        form.submit(function(env) {
+            env.preventDefault();
+            var result;
+            const operation = $('#operation').val();
+            const left = $('#left').val();
+            const right = $('#right').val();
+            if (left == '' || right == '' || left < 0 || right < 0)
+                alert('Error :(');
+            else {
+                if (operation == "+") result = eval(left + operation + right);
+                else if (operation == "-") result = left - right;
+                else if (operation == "*") result = left * right;
+                else if (right == 0) result = "It's over 9000 !";
+                else if (operation == "/") result = left / right;
+                else if (operation == "%") result = left % right;
+                console.log(result);
+                alert(result);
+            }
+        });
+        setTimeout(please, 30000);
+    </script>
+</body>
+
+</html>
